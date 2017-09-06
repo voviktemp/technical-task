@@ -1,76 +1,48 @@
 <?php
 
-class Animal
-{
-    public $name;
+/////////////////////////////////
+// animals skills
+interface Iwalkable {
 
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
-
-    public function walk()
-    {
-        if($this->name == 'dog' || $this->name == 'cat' || $this->name == 'rat')
-            echo $this->name . ' walking';
-    }
-
-    public function meow()
-    {
-        echo $this->name . ' meow';
-    }
-
-    public function run()
-    {
-        echo $this->name . ' run';
-    }
-
-    public function wuf()
-    {
-        echo $this->name . ' wuf';
-    }
-
-    public function byte($object)
-    {
-        echo $this->name . ' has bitten' . $object;
-    }
-
-    public function fly()
-    {
-        echo $this->name . ' fly';
-    }
-
-    public function pi()
-    {
-        echo $this->name . ' pi';
-    }
+    public function walk(): void;
 }
 
-$animals = [
-    new Animal('cat'), new Animal('dog'), new Animal('sparrow'), new Animal('rat')
-];
+interface Ieatable {
 
-foreach($animals as $animal) {
-    switch($animal->name)
-    {
-        case 'cat':
-            $animal->walk();
-            $animal->meow();
-            break;
-        case 'dog':
-            $animal->walk();
-            $animal->run();
-            $animal->wuf();
-            $animal->byte('man');
-            break;
-        case 'sparrow':
-            $animal->walk();
-            $animal->tweet();
-            $animal->fly();
-            break;
-        case 'rat':
-            $animal->pi();
-            break;
-    }
-    $animal->eat('food');
+    public function eat(string $someFood): void;
+}
+
+interface Imeowable {
+
+    public function meow(): void;
+}
+
+interface Irunable {
+
+    public function run(): void;
+}
+
+interface Iwufable {
+
+    public function wuf(): void;
+}
+
+interface Ibiteable {
+
+    public function bite(string $param): void;
+}
+
+interface Iflyable {
+
+    public function fly(): void;
+}
+
+interface Itweetable {
+
+    public function tweet(): void;
+}
+
+interface Ipipable {
+
+    public function pip(): void;
 }
