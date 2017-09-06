@@ -46,3 +46,10 @@ interface Ipipable {
 
     public function pip(): void;
 }
+
+////////////////////////////////////////////////
+// animal tree 1 level
+interface Ianimal extends Iwalkable, Ieatable {
+
+    public function getName(): string;
+}
