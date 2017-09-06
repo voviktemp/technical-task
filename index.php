@@ -198,3 +198,65 @@ class AnimalFactory implements IAnimalFactory {
     }
 
 }
+
+
+interface IZooManager {
+
+    public function __construct(array $data, IAnimalFactory $factory);
+
+    public function showAllAnimals(): void;
+}
+
+class ZooManager implements IZooManager {
+
+    private $zooArray;
+    private $factory;
+
+    function __construct(array $data, \IAnimalFactory $factory) {
+        $this->zooArray = $data;
+        $this->factory = $factory;
+    }
+
+    public function showAllAnimals(): void {
+        foreach ($this->zooArray as $key => $value) {
+            $object = $this->factory::build($key, $value);
+
+            $object->walk();
+
+            if ($object instanceof Irunable) {
+                $object->run();
+            }
+            if ($object instanceof Imeowable) {
+                $object->meow();
+            }
+            if ($object instanceof Iwufable) {
+                $object->wuf();
+            }
+            if ($object instanceof Ibiteable) {
+                $object->bite("some cat");
+            }
+            if ($object instanceof Itweetable) {
+                $object->tweet();
+            }
+            if ($object instanceof Iflyable) {
+                $object->fly();
+            }
+            if ($object instanceof Ipipable) {
+                $object->pip();
+            }
+
+            $object->eat("visitor");
+        }
+    }
+
+}
+
+///////////////////////// START ZOO DAY ///////////////////////
+$obj = new ZooManager(array(
+    "cat" => "Arnold",
+    "dog" => "Tad",
+    "sparrow" => "MArk",
+    "rat" => "Ann"
+        ), new AnimalFactory());
+
+$obj->showAllAnimals();
