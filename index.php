@@ -53,3 +53,32 @@ interface Ianimal extends Iwalkable, Ieatable {
 
     public function getName(): string;
 }
+
+//////////////////////
+// animal tree 2 level
+interface Ibird extends Ianimal, Iflyable {
+    
+}
+
+interface Iflightless extends Ianimal, Irunable {
+    
+}
+
+//////////////////////
+// animal tree 3 level
+
+interface Isparrow extends Ibird, Itweetable {
+    
+}
+
+interface Icat extends Iflightless, Imeowable {
+    
+}
+
+interface Idog extends Iflightless, Iwufable, Ibiteable {
+    
+}
+
+interface Irat extends Iflightless, Ipipable {
+    
+}
