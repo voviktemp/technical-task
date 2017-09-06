@@ -137,3 +137,51 @@ abstract class AbstractFlyingAnimal extends AbstractAnimal implements Ibird {
     }
 
 }
+
+///////////////////////////////////////////////////////
+// cat
+class CatAnimal extends AbstractFlightlessAnimal implements Icat {
+
+    public function meow(): void {
+        $this->print_on_screen($this->getName() . " meow");
+    }
+
+}
+
+// dog
+class DogAnimal extends AbstractFlightlessAnimal implements Idog {
+
+    public function bite(string $param): void {
+        $this->print_on_screen($this->getName() . " has bitten " . $param);
+    }
+
+    public function wuf(): void {
+        $this->print_on_screen($this->getName() . " wuf");
+    }
+
+}
+
+class RatAnimal extends AbstractFlightlessAnimal implements Irat {
+
+    public function pip(): void {
+        $this->print_on_screen($this->getName() . " pip");
+    }
+
+}
+
+// parrot sparrow, can copy other animals
+class SparrowAnimal extends ABstractFlyingAnimal implements Isparrow, Ipipable, Iwufable {
+
+    public function tweet(): void {
+        $this->print_on_screen($this->getName() . " tweet");
+    }
+
+    public function pip(): void {
+        $this->print_on_screen("pip!!! I'am 'pipable' sparrow, my name is " . $this->getName() . "! I learned this from my friend, the rat...");
+    }
+
+    public function wuf(): void {
+        $this->print_on_screen("WUF!!! I'am 'pipable' sparrow, my name is " . $this->getName() . "! I learned this from my friend, the dog...");
+    }
+
+}
