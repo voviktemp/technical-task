@@ -185,3 +185,16 @@ class SparrowAnimal extends ABstractFlyingAnimal implements Isparrow, Ipipable, 
     }
 
 }
+
+class AnimalFactory implements IAnimalFactory {
+
+    public static function build(string $type, string $name): Ianimal {
+        $className = ucfirst(strtolower($type)) . "Animal";
+        if (class_exists($className)) {
+            return new $className($name);
+        } else {
+            return new Exception("Wow, I odn't now this animal!");
+        }
+    }
+
+}
