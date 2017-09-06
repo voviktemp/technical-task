@@ -52,6 +52,8 @@ interface Ipipable {
 interface Ianimal extends Iwalkable, Ieatable {
 
     public function getName(): string;
+
+    public function presentMe(): void;
 }
 
 //////////////////////
@@ -146,6 +148,12 @@ class CatAnimal extends AbstractFlightlessAnimal implements Icat {
         $this->print_on_screen($this->getName() . " meow");
     }
 
+    public function presentMe(): void {
+        $this->walk();
+        $this->meow();
+        $this->eat("milk");
+    }
+
 }
 
 // dog
@@ -159,12 +167,25 @@ class DogAnimal extends AbstractFlightlessAnimal implements Idog {
         $this->print_on_screen($this->getName() . " wuf");
     }
 
+    public function presentMe(): void {
+        $this->walk();
+        $this->run();
+        $this->wuf();
+        $this->bite("some man");
+        $this->eat("visitor bones");
+    }
+
 }
 
 class RatAnimal extends AbstractFlightlessAnimal implements Irat {
 
     public function pip(): void {
         $this->print_on_screen($this->getName() . " pip");
+    }
+
+    public function presentMe(): void {
+        $this->pip();
+        $this->eat("filth");
     }
 
 }
@@ -184,6 +205,15 @@ class SparrowAnimal extends ABstractFlyingAnimal implements Isparrow, Ipipable, 
         $this->print_on_screen("WUF!!! I'am 'pipable' sparrow, my name is " . $this->getName() . "! I learned this from my friend, the dog...");
     }
 
+    public function presentMe(): void {
+        $this->walk();
+        $this->tweet();
+        $this->fly();
+        $this->pip();
+        $this->wuf();
+        $this->eat("corn");
+    }
+
 }
 
 class AnimalFactory implements IAnimalFactory {
@@ -198,7 +228,6 @@ class AnimalFactory implements IAnimalFactory {
     }
 
 }
-
 
 interface IZooManager {
 
@@ -221,31 +250,8 @@ class ZooManager implements IZooManager {
         foreach ($this->zooArray as $key => $value) {
             $object = $this->factory::build($key, $value);
 
-            $object->walk();
-
-            if ($object instanceof Irunable) {
-                $object->run();
-            }
-            if ($object instanceof Imeowable) {
-                $object->meow();
-            }
-            if ($object instanceof Iwufable) {
-                $object->wuf();
-            }
-            if ($object instanceof Ibiteable) {
-                $object->bite("some cat");
-            }
-            if ($object instanceof Itweetable) {
-                $object->tweet();
-            }
-            if ($object instanceof Iflyable) {
-                $object->fly();
-            }
-            if ($object instanceof Ipipable) {
-                $object->pip();
-            }
-
-            $object->eat("visitor");
+            $object->presentMe();
+            unset($object);
         }
     }
 
