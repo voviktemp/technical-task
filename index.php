@@ -82,3 +82,58 @@ interface Idog extends Iflightless, Iwufable, Ibiteable {
 interface Irat extends Iflightless, Ipipable {
     
 }
+
+// animal factory
+interface IAnimalFactory {
+
+    public static function build(string $type, string $name): Ianimal;
+}
+
+///////////////////////////////////////////////
+// release base animal functions
+abstract class AbstractAnimal implements Ianimal {
+
+    protected $name;
+    private $separator = "<br>";
+
+    public function __construct($name) {
+        $this->setName($name);
+    }
+
+    public function eat(string $someFood): void {
+        $this->print_on_screen($this->getName() . ' eating ' . $someFood);
+    }
+
+    public function walk(): void {
+        $this->print_on_screen($this->getName() . ' walking');
+    }
+
+    public function getName(): string {
+        return $this->name;
+    }
+
+    private function setName($name) {
+        $this->name = $name;
+    }
+
+    protected function print_on_screen(string $str): void {
+        echo $str . $this->separator;
+    }
+
+}
+
+abstract class AbstractFlightlessAnimal extends AbstractAnimal implements Iflightless {
+
+    public function run(): void {
+        $this->print_on_screen($this->getName() . " runing");
+    }
+
+}
+
+abstract class AbstractFlyingAnimal extends AbstractAnimal implements Ibird {
+
+    public function fly(): void {
+        $this->print_on_screen($this->getName() . " Fly");
+    }
+
+}
